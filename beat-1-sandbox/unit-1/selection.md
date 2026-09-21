@@ -44,17 +44,24 @@ Quote source text directly in each field below. Paraphrase does not satisfy them
 [The agreement score of each run you did, in order. A single run is a complete answer if
 only one run occurred. **The last score in your list must match the agreement line in the
 `eval-run.txt` you committed** — that file is the record of your final run.]
+1. Run 1 (Full) 14/20
+2. Run 2 (Full) 14/20
+3. Change the newcomer_scope
+4. Run 4 (cheap, 6 issue): unable to fix all the issues.
+5. Final fun: 14/20
 
 **Issue analysis**
 
 [One scored issue, identified by id (`issue-01` through `issue-20`; the `calib-`
 issues are not scored). State your rubric's decision, the gold label, and the
 reasoning that produced your rubric's result.]
+I fixed it by making newcomer_scope pass by default and fail only when the text contains a named red flag (redesign or rewrite, 4+ files, an epic with  + tasks, or a maintainer saying it is large). I also listed what does not count as a red flag, such as naming files as context or having no file list at all. After that change, issue-01 
 
 **Check rationale**
 
 [One check from the `rubric.md` uploaded to `tools/issue-select/`, quoted as it is
 currently written, with the reasoning behind its current form.]
+I wrote it to this way to prevent the rubric from failing. 
 
 **Trade-offs**
 
@@ -62,6 +69,7 @@ currently written, with the reasoning behind its current form.]
 result it changes, a canary you re-ran with `--only`, a case you accept it will miss, or a
 stated reason nothing changed elsewhere. "Nothing changed, and here is how I know" earns
 the point in full when the reason follows.]
+I had issue with making the newcommer scope and pass-by-default where the issues was it had fales reject where i had to make sure it has false reject to make sure it passes.
 
 ---
 
@@ -76,10 +84,13 @@ This is also the basis for the claim comment you write in Unit 2.
 [Answer all three:
 
 1. The issue's fit to your interests and to the time available.
+The issue fits my interest because it provides a change to work on something related to my skills. The scope works with the time.
+
 2. What the verdict identified correctly, and what you weighed that the rubric could
    not.
+The verdict correctly identify that issue has a clear scope for contribution
 3. The anticipated difficulty in claiming it.]
-
+I think it should be easy if noone claimed it.
 ---
 
 Related paths: `eval-run.txt` in this directory; your skill's files in
