@@ -34,28 +34,29 @@ will fail eval issues designed around that family.
 
 | Check | Evidence | Pass condition | Weight |
 |---|---|---|---|
-| maintainer_activity | The last 5 default-branch commit dates in repo-facts | The newest of the last 5 commits is no more than 30 days old | required |
-| repo_usage | Repo-facts: commit list and contributor/author info for the past 90 days | At least 3 commits on the default branch in the past 90 days, from at least 2 distinct authors | required |
-| issue_open | Issue header: state and labels | The issue is open and has none of the labels `wontfix`, `duplicate`, `invalid`, `blocked`, or `on hold` | required |
-| newcomer_scope | Issue body and any maintainer comment that sketches the fix. Grade only from the text; do not estimate effort or file counts yourself | PASS unless the text explicitly contains a red flag: (a) it asks for a redesign, rewrite, whole-module refactor, migration, new subsystem, new integration, or architecture change; (b) it lists 4 or more separate files, modules, or components to change; (c) it is an epic or tracking issue with 4 or more separate tasks; (d) a maintainer calls it large or complex, or says it needs a design decision or RFC before work starts. These are NOT red flags: naming several files as context, a checklist of steps inside one function or feature, a maintainer suggesting an approach, or a missing file list. A single bug fix, docs change, test addition, or small feature with a stated expected behavior passes. Quote the red-flag sentence as evidence when failing. UNCLEAR only if the issue body is empty | required |
-| not_assigned | Issue header: assignees | The assignee list is empty | required |
-| no_linked_pr | Issue body, comment thread, and any linked-PR or cross-reference events | No open or merged PR is linked to or described as fixing this issue | required |
-| no_active_claim_comment | Comment thread | No comment saying "I'll take this", "working on it", or similar within the last 14 days, unless the commenter later withdrew. A claim older than 14 days with no follow-up counts as abandoned | required |
-| policy_compliance | Issue body, comment thread, and any README, CONTRIBUTING, or policy text included in repo-facts | PASS unless the text explicitly shows one of: (a) the project's own policy forbids this kind of contribution (for example a ban on AI/LLM-generated code, or a rule that PRs are accepted only after a maintainer approves or assigns the issue, with no such approval shown); (b) the issue says it is maintainers-only, internal, not open to outside contributors, or "do not open a PR"; (c) the task asks the contributor to bypass security controls, copy code under an incompatible license, scrape restricted data, spam, or deceive. Quote the policy or issue text as evidence | required |
-| maintainer_response | Issue body and comment thread | A maintainer (owner, member, or collaborator) commented on this issue within the past 90 days. If there is no maintainer comment, this check fails | preferred |
-| issue_evidence | Issue body and comment thread | The issue gives at least one concrete pointer: reproduction steps, an error message, a named file or function, or explicit acceptance criteria | preferred |
-| maintainer_welcomes | Issue labels and comment thread | The issue has a label such as `good first issue` or `help wanted`, or a maintainer wrote that they would accept a PR | preferred |
-| contributing_docs | Repo-facts: file list or README/CONTRIBUTING mentions | A `CONTRIBUTING` file or a README section explains setup or how to submit a change | preferred |
-| has_tests | Repo-facts: file list | A test directory or test config exists, so a newcomer can verify their change | preferred |
+| maintainer_activity | Last 5 default-branch commit dates in repo-facts | The newest commit is no more than 30 days old | required |
+| repo_usage | Repo-facts commit list and author info from the past 90 days | At least 3 commits in the past 90 days from at least 2 different authors | required |
+| issue_open | Issue header: state and labels | The issue is open and does not have `wontfix`, `duplicate`, `invalid`, `blocked`, or `on hold` | required |
+| newcomer_scope | Issue body and maintainer comments about the fix | PASS unless the issue clearly asks for a redesign, rewrite, large refactor, migration, new subsystem, new integration, or architecture change. It also fails if it lists 4 or more files, modules, or components to change, has 4 or more separate tasks, or a maintainer says it is large or complex. Naming files as context, having no file list, or having a small checklist does not fail this check. A small bug fix, docs change, test, or feature passes. UNCLEAR only if the issue body is empty | required |
+| not_assigned | Issue header: assignees | There are no assignees | required |
+| no_linked_pr | Issue body, comments, and linked PR information | There is no open or merged PR linked to or described as fixing the issue | required |
+| no_active_claim_comment | Comment thread | Nobody said they are working on or taking the issue within the last 14 days, unless they later withdrew. Claims older than 14 days with no follow-up count as abandoned | required |
+| policy_compliance | Issue, comments, README, CONTRIBUTING, and policy text in repo-facts | PASS unless the project does not allow this type of contribution, the issue is maintainers-only or internal, the issue says not to open a PR, or the task asks for something that breaks security, licensing, or other project rules | required |
+| maintainer_response | Issue body and comments | A maintainer commented on the issue within the past 90 days | preferred |
+| issue_evidence | Issue body and comments | The issue has at least one useful detail such as reproduction steps, an error message, a file or function name, or acceptance criteria | preferred |
+| maintainer_welcomes | Issue labels and comments | The issue has a label like `good first issue` or `help wanted`, or a maintainer says they will accept a PR | preferred |
+| contributing_docs | Repo-facts file list, README, or CONTRIBUTING | There is a CONTRIBUTING file or README section explaining setup or how to submit changes | preferred |
+| has_tests | Repo-facts file list | A test directory or test config exists | preferred |
 | issue_recency | Issue header: created date | The issue was opened within the past 12 months | preferred |
 
 ## Verdict rule
-
-- Accept if every `required` check passes. Otherwise reject.
-- `unclear` on a `required` check counts as `fail`.
-- `unclear` on a `preferred` check counts as `fail` for ranking only.
-- Preferred checks never change the verdict.
-- Rank accepted issues by the number of preferred checks that pass, highest first. Break ties by the more recent maintainer comment.
+- Accept if every required check passes
+- Reject if any required check fails
+- `unclear` on a required check counts as fail
+- `unclear` on a preferred check counts as fail for ranking only
+- Preferred checks never change accept or reject
+- Accepted issues can be ranked by how many preferred checks pass
+- If two issues have the same number of preferred checks, use the more recent maintainer comment as the tie breaker
 
 <!-- State how the grades above combine into accept or reject, and how
 unclear is treated. Example shape (write your own): "accept if every
