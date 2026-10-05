@@ -43,18 +43,21 @@ packages designed around that family.
 
 | Check | Evidence | Pass condition | Weight |
 |---|---|---|---|
-| environment | Environment information in the repro report | The setup used for the repo is clearly described | required |
-| steps | steps in the repo report | make sure someone else can follow the steps to try to reproduction the issues or the problem | required |
-| behavior | Output or results from the repo | The results show the issues desribed in the Github issues | required |
-| outcome | The reported result and supporting evidence | The report shows exactly what happened and doesn't claim more than the evidence shown | required |
-| conventions |  Claim and repo comments | The comments follow the repo rules such as contributions rules | required |
-| evidence | screenshots, output, logs, or other repo proof | The evidence supports the reported result, whether the issues was reproduced or could not be reproduced | required |
+| environment | Environment information in the repro report and repo-facts block | The environment records the repo version, runtime, dependencies, and other details needed to compare the reproduction with the issue. If the environment is different from the issue target, the difference is stated. | required |
+| steps | Steps in the reproduction report | The steps include the starting state and the commands or actions used to test the issue. They must be enough for another person to repeat the same test without guessing missing setup. | required |
+| behavior | Output, logs, screenshots, or other artifacts read against the behavior described in the GitHub issue | The evidence shows the behavior described by the issue, or shows that the reported behavior did not occur in the tested environment. Evidence of only a related or different behavior does not pass. | required |
+| outcome | The reported result and the supporting evidence | The report states whether the issue was reproduced or could not be reproduced, and every claim about the result is supported by the evidence shown. | required |
+| conventions | Claim and reproduction comments, plus the repo's contribution and communication rules | The comments follow the repo's stated rules and include any required information or AI-use disclosure. | required |
+| evidence | Screenshots, output, logs, or other proof in the reproduction package | The evidence supports the reported outcome and can be connected to the issue and the steps that produced it. | required |
 
 ## Verdict rule
 Accept if every required check passes.
+
 Reject if any required check fails.
-If any check is unclear, treat it as fail.
-preferred checks do not change the verdict.
+
+If any required check is unclear, treat it as fail.
+
+Preferred checks do not change the verdict.
 
 <!-- State how the grades above combine into accept or reject, and how
 unclear is treated. Example shape (write your own): "accept if every
